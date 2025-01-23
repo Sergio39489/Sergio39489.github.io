@@ -29,20 +29,6 @@
       max-width: 1200px;
     }
 
-    .side-images {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 100px;
-    }
-
-    .side-images img {
-      max-width: 100%;
-      height: auto;
-      object-fit: contain;
-      margin: 10px 0;
-    }
-
     .main-content {
       flex: 1;
       text-align: center;
@@ -54,22 +40,10 @@
       grid-template-columns: repeat(10, 1fr);
       gap: 10px;
       margin-top: 20px;
+      justify-items: center;
     }
 
-    #payment-form {
-      margin-top: 30px;
-      display: none; /* Ocultamos el formulario inicialmente */
-      width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-
-    #card-errors {
-      color: red;
-      margin-top: 10px;
-    }
-
+    /* Botones numéricos */
     button {
       padding: 10px;
       background-color: #007bff;
@@ -77,6 +51,12 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 1rem; /* Tamaño adecuado del texto */
+      width: 50px; /* Ajuste del tamaño de los botones */
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     button:disabled {
@@ -84,27 +64,7 @@
       cursor: not-allowed;
     }
 
-    /* Estilo para el contador */
-    .demo {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-
-    .info {
-      font-size: 1.5rem;
-      color: green;
-      margin-top: 20px;
-    }
-
-    /* Estilo para el texto adicional debajo del encabezado */
-    .subheading {
-      font-size: 1.2rem;
-      color: #555; /* Color gris más claro */
-      margin-top: 10px;
-    }
-
-    /* Estilo para los apartados numerados */
+    /* Contenedor de los apartados numerados */
     .apartado {
       margin-top: 20px;
       font-size: 1.1rem;
@@ -119,21 +79,50 @@
       font-weight: bold;
       color: #333;
     }
+
+    .apartado img {
+      max-width: 100px; /* Reducir el tamaño de las imágenes */
+      height: auto;
+      margin-top: 10px;
+    }
+
+    /* Estilo para pantallas pequeñas */
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(5, 1fr); /* 5 columnas en pantallas más pequeñas */
+      }
+      button {
+        width: 40px;
+        height: 40px;
+        font-size: 0.8rem; /* Reducir tamaño del texto en móvil */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas muy pequeñas */
+      }
+      button {
+        width: 35px;
+        height: 35px;
+        font-size: 0.7rem; /* Reducir más el texto */
+      }
+    }
+
+    /* Estilo para el formulario de pago */
+    #payment-form {
+      margin-top: 30px;
+      display: none; /* El formulario está oculto inicialmente */
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      margin-bottom: 50px; /* Agregar espacio debajo del formulario */
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Contenedor para las imágenes laterales -->
-    <div class="side-images">
-      <!-- 2 imágenes a la izquierda -->
-      <a href="#" id="left-image-link-1" target="_blank">
-        <img id="left-image-1" src="https://i.postimg.cc/tT8bHp51/camisetabarcelona.png" alt="Enlace izquierdo 1">
-      </a>
-      <a href="#" id="left-image-link-2" target="_blank">
-        <img id="left-image-2" src="https://i.postimg.cc/LsbKz2Gy/reloj.jpg" alt="Enlace izquierdo 2">
-      </a>
-    </div>
-
     <!-- Contenido principal -->
     <div class="main-content">
       <h1>Bienvenido al sorteo de Arabiarituals</h1>
@@ -142,35 +131,28 @@
       
       <!-- Apartados numerados -->
       <div class="apartado">
-        <h4>1- Camiseta barça</h4>
+        <h4>0- Camiseta barça</h4>
+        <img src="https://i.postimg.cc/tT8bHp51/camisetabarcelona.png" alt="Camiseta barça">
       </div>
       
       <div class="apartado">
-        <h4>2- Apple Watch Ultra 2</h4>
+        <h4>1- Apple Watch Ultra 2</h4>
+        <img src="https://i.postimg.cc/LsbKz2Gy/reloj.jpg" alt="Apple Watch Ultra 2">
       </div>
       
       <div class="apartado">
-        <h4>3- Perfume Belle dolce</h4>
+        <h4>2- Perfume Belle dolce</h4>
+        <img src="https://i.postimg.cc/ydMMbn1c/image.png" alt="Perfume Belle dolce">
       </div>
       
       <div class="apartado">
-        <h4>4- Perfume Fakhar</h4>
+        <h4>3- Perfume Fakhar</h4>
+        <img src="https://i.postimg.cc/br17cbrM/image.png" alt="Perfume Fakhar">
       </div>
 
       <!-- Contenedor del contador -->
       <div id="demo" class="demo">Cargando...</div>
       <div id="number-grid" class="grid"></div>
-    </div>
-
-    <!-- Derecha -->
-    <div class="side-images">
-      <!-- 2 imágenes a la derecha -->
-      <a href="#" id="right-image-link-1" target="_blank">
-        <img id="right-image-1" src="https://i.postimg.cc/ydMMbn1c/image.png" alt="Enlace derecho 1">
-      </a>
-      <a href="#" id="right-image-link-2" target="_blank">
-        <img id="right-image-2" src="https://i.postimg.cc/br17cbrM/image.png" alt="Enlace derecho 2">
-      </a>
     </div>
   </div>
 
