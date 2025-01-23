@@ -142,19 +142,19 @@
       
       <!-- Apartados numerados -->
       <div class="apartado">
-        <h4>1- Camiseta barça</h4>
+        <h4>0- Camiseta barça</h4>
       </div>
       
       <div class="apartado">
-        <h4>2- Apple Watch Ultra 2</h4>
+        <h4>1- Apple Watch Ultra 2</h4>
       </div>
       
       <div class="apartado">
-        <h4>3- Perfume Belle dolce</h4>
+        <h4>2- Perfume Belle dolce</h4>
       </div>
       
       <div class="apartado">
-        <h4>4- Perfume Fackar</h4>
+        <h4>3- Perfume Fackar</h4>
       </div>
 
       <!-- Contenedor del contador -->
@@ -203,7 +203,7 @@
 
       // Generar botones de números
       const grid = document.getElementById("number-grid");
-      for (let i = 1; i <= 100; i++) { // Cambié el rango para que empiece en 1 hasta 100
+      for (let i = 0; i <= 100; i++) { // Cambié el rango para que empiece en 0 hasta 100
         const button = document.createElement("button");
         button.textContent = i;
         button.id = `number-${i}`;
