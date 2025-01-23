@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Sorteo Arabiarituals</title>
+  
+  <!-- Favicon cargado desde la misma carpeta donde se encuentra el archivo HTML -->
+  <link rel="icon" href="fotologo.png" type="image/png" id="favicon">
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .side-images {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100px;
+    }
+
+    .side-images img {
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      margin: 10px 0;
+    }
+
+    .main-content {
+      flex: 1;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    #payment-form {
+      margin-top: 30px;
+      display: none; /* Ocultamos el formulario inicialmente */
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    #card-errors {
+      color: red;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    /* Estilo para el contador */
+    .demo {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .info {
+      font-size: 1.5rem;
+      color: green;
+      margin-top: 20px;
+    }
+
+    /* Estilo para el texto adicional debajo del encabezado */
+    .subheading {
+      font-size: 1.2rem;
+      color: #555; /* Color gris más claro */
+      margin-top: 10px;
+    }
+
+    /* Estilo para los apartados numerados */
+    .apartado {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      text-align: left;
+      padding: 10px;
+      border-left: 3px solid #007bff;
+      background-color: #f8f9fa;
+    }
+
+    .apartado h4 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Contenedor para las imágenes laterales -->
+    <div class="side-images">
+      <!-- 2 imágenes a la izquierda -->
+      <a href="#" id="left-image-link-1" target="_blank">
+        <img id="left-image-1" src="https://i.postimg.cc/tT8bHp51/camisetabarcelona.png" alt="Enlace izquierdo 1">
+      </a>
+      <a href="#" id="left-image-link-2" target="_blank">
+        <img id="left-image-2" src="https://i.postimg.cc/LsbKz2Gy/reloj.jpg" alt="Enlace izquierdo 2">
+      </a>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <h1>Bienvenido al sorteo de Arabiarituals</h1>
+      <!-- Texto adicional debajo del encabezado -->
+      <p class="subheading">Participa para ganar los siguientes increibles premios. ¡No te lo pierdas!</p>
+      
+      <!-- Apartados numerados -->
+      <div class="apartado">
+        <h4>0- Camiseta barça</h4>
+      </div>
+      
+      <div class="apartado">
+        <h4>1- Apple Watch Ultra 2</h4>
+      </div>
+      
+      <div class="apartado">
+        <h4>2- Perfume Belle dolce</h4>
+      </div>
+      
+      <div class="apartado">
+        <h4>3- Perfume Fackar</h4>
+      </div>
+
+      <!-- Contenedor del contador -->
+      <div id="demo" class="demo">Cargando...</div>
+      <div id="number-grid" class="grid"></div>
+    </div>
+
+    <!-- Derecha -->
+    <div class="side-images">
+      <!-- 2 imágenes a la derecha -->
+      <a href="#" id="right-image-link-1" target="_blank">
+        <img id="right-image-1" src="https://i.postimg.cc/ydMMbn1c/image.png" alt="Enlace derecho 1">
+      </a>
+      <a href="#" id="right-image-link-2" target="_blank">
+        <img id="right-image-2" src="https://i.postimg.cc/br17cbrM/image.png" alt="Enlace derecho 2">
+      </a>
+    </div>
+  </div>
+
+  <!-- Formulario de pago (sin código postal) -->
+  <div id="payment-form">
+    <h2>Pagar 7€ para el número seleccionado</h2> <!-- Cambié el precio de 2€ a 7€ -->
+    <div id="card-element"></div>
+    <div id="card-errors" role="alert"></div>
+    <button id="submit-button">Pagar</button>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Cambiar el favicon automáticamente
+      const favicon = document.getElementById("favicon");
+      favicon.href = "fotologo.png"; // Establecer el nuevo favicon desde la misma carpeta
+
+      // Configurar Stripe
+      const stripe = Stripe("TU_PUBLIC_KEY_DE_STRIPE"); // Sustituir por tu clave pública de Stripe
+      const elements = stripe.elements();
+      const cardElement = elements.create("card");
+      cardElement.mount("#card-element");
+
+      const paymentForm = document.getElementById("payment-form");
+      const cardErrors = document.getElementById("card-errors");
+
+      let selectedNumber = null;
+
+      // Generar botones de números
+      const grid = document.getElementById("number-grid");
+      for (let i = 0; i <= 100; i++) { // Cambié el rango para que empiece en 0 hasta 100
+        const button = document.createElement("button");
+        button.textContent = i;
+        button.id = `number-${i}`;
+        button.onclick = () => {
+          selectedNumber = i;
+          paymentForm.style.display = "block"; // Mostrar el formulario de pago
+        };
+        grid.appendChild(button);
+      }
+
+      // Lógica para pagar y marcar número como comprado
+      paymentForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const { token, error } = await stripe.createToken(cardElement);
+        if (error) {
+          cardErrors.textContent = error.message;
+        } else {
+          // Aquí puedes agregar la lógica de pago con tu servidor
+          alert(`Pago exitoso para el número ${selectedNumber}`);
+
+          // Marca el número como comprado
+          const numberButton = document.getElementById(`number-${selectedNumber}`);
+          numberButton.disabled = true;
+          numberButton.textContent = "Comprado";  // Cambia el texto a "Comprado"
+
+          // Ocultar el formulario de pago después de la compra
+          paymentForm.style.display = "none";
+        }
+      });
+
+      // Lógica para el contador: recupera la fecha de finalización desde localStorage
+      let countdownDate = localStorage.getItem("countdownDate");
+
+      // Si no existe la fecha, la establecemos en 10 días desde ahora
+      if (!countdownDate) {
+        countdownDate = new Date().getTime() + (10 * 24 * 60 * 60 * 1000); // 10 días desde ahora
+        localStorage.setItem("countdownDate", countdownDate); // Guardar la fecha en localStorage
+      }
+
+      const countdownElement = document.getElementById("demo");
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const timeRemaining = countdownDate - now;
+
+        if (timeRemaining <= 0) {
+          countdownElement.innerHTML = "La rifa ha terminado.";
+          return;
+        }
+
+        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60)); // Corregido
+        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000); // Corregido
+
+        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+
+      // Actualizar el contador cada segundo
+      setInterval(updateCountdown, 1000);
+      updateCountdown(); // Iniciar el contador de inmediato
+    });
+  </script>
+</body>
+</html>
