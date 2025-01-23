@@ -1,37 +1,20 @@
-/* Diseño general */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #f7f7f7;
-}
-
-h1 {
-  color: #333;
-  font-size: 24px;
-  text-align: center;
-}
-
 .grid {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 10px;
-  margin: 20px 0;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); /* Ajustar automáticamente al espacio */
+  gap: 15px; /* Aumentar el espacio entre botones */
+  justify-content: center; /* Centrar los botones en el contenedor */
+  margin-top: 20px; /* Separar más la grilla del contador */
 }
 
 button {
-  padding: 10px;
-  font-size: 16px;
+  padding: 10px 5px; /* Hacer los botones más compactos */
+  font-size: 14px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
 }
 
 button:disabled {
@@ -39,108 +22,16 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.timer {
-  margin: 20px 0;
-  font-size: 18px;
+.demo {
+  font-size: 1.8rem; /* Tamaño ligeramente mayor */
+  font-weight: bold;
+  margin-bottom: 20px; /* Más espacio entre el contador y los botones */
 }
-
-/* Estilo para el formulario de pago */
-#payment-form {
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: white;
-  width: 300px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-#stripe-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#card-element {
-  width: 100%;
-  max-width: 280px;
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
-
-#submit-button {
-  font-size: 16px;
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* Estilo de los guiones */
-.dashes {
-  font-size: 24px;
-  color: #333;
-  margin: 10px 0;
-}
-
-/* Responsividad */
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr); /* Cambia a 4 columnas */
-    gap: 5px; /* Reduce el espacio */
-  }
-
-  button {
-    font-size: 14px; /* Botones más pequeños */
-    padding: 8px; /* Ajusta el tamaño */
-  }
-
-  .timer {
-    font-size: 16px; /* Reducir tamaño del temporizador */
-    text-align: center;
-  }
-
-  #payment-form {
-    width: 90%; /* Más ancho en móviles */
-    padding: 15px; /* Menos padding */
-  }
-
-  #card-element {
-    max-width: 100%; /* Ocupa todo el espacio disponible */
-  }
-
-  h1 {
-    font-size: 20px; /* Título más pequeño */
-    text-align: center;
-  }
-}
-
-/* Mejora para pantallas muy pequeñas (max-width: 480px) */
-@media (max-width: 480px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr); /* Cambia a 3 columnas */
-    gap: 4px; /* Espaciado más pequeño */
-  }
-
-  button {
-    font-size: 12px; /* Botones más pequeños */
-    padding: 6px; /* Ajusta el tamaño */
-  }
-
-  #payment-form {
-    width: 95%; /* Más ancho en móviles pequeños */
-  }
-
-  h1 {
-    font-size: 18px; /* Título más pequeño */
-  }
-
-  .timer {
-    font-size: 14px; /* Temporizador reducido */
-  }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); /* Ajustar automáticamente al espacio */
+  gap: 15px; /* Separación entre botones */
+  justify-content: center; /* Centrar botones horizontalmente */
+  margin-top: 20px; /* Separación desde el contador */
+  margin-left: 20px; /* Mueve la grilla hacia la derecha */
 }
