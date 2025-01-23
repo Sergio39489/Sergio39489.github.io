@@ -13,6 +13,8 @@ body {
 
 h1 {
   color: #333;
+  font-size: 24px;
+  text-align: center;
 }
 
 .grid {
@@ -84,4 +86,61 @@ button:disabled {
   font-size: 24px;
   color: #333;
   margin: 10px 0;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr); /* Cambia a 4 columnas */
+    gap: 5px; /* Reduce el espacio */
+  }
+
+  button {
+    font-size: 14px; /* Botones más pequeños */
+    padding: 8px; /* Ajusta el tamaño */
+  }
+
+  .timer {
+    font-size: 16px; /* Reducir tamaño del temporizador */
+    text-align: center;
+  }
+
+  #payment-form {
+    width: 90%; /* Más ancho en móviles */
+    padding: 15px; /* Menos padding */
+  }
+
+  #card-element {
+    max-width: 100%; /* Ocupa todo el espacio disponible */
+  }
+
+  h1 {
+    font-size: 20px; /* Título más pequeño */
+    text-align: center;
+  }
+}
+
+/* Mejora para pantallas muy pequeñas (max-width: 480px) */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr); /* Cambia a 3 columnas */
+    gap: 4px; /* Espaciado más pequeño */
+  }
+
+  button {
+    font-size: 12px; /* Botones más pequeños */
+    padding: 6px; /* Ajusta el tamaño */
+  }
+
+  #payment-form {
+    width: 95%; /* Más ancho en móviles pequeños */
+  }
+
+  h1 {
+    font-size: 18px; /* Título más pequeño */
+  }
+
+  .timer {
+    font-size: 14px; /* Temporizador reducido */
+  }
 }
